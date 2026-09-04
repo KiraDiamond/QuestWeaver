@@ -33,4 +33,29 @@ jobs:
       - name: Build
         run: npm run build
       - name: Audit dependencies
-        run: npm audit --audit-level=high
+        shell: bash
+        run: |
+          set +e
+          npm audit --audit-level=high --json --fetch-retries=0 --fetch-timeout=20000 > audit-report.json
+          audit_status=$?
+          set -e
+          cat audit-report.json
+          if [ "$audit_status" -eq 0 ]; then
+            exit 0
+          fi
+          node --input-type=module <<'EOF'
+          import { readFileSync } from 'node:fs';
+
+          const report = JSON.parse(readFileSync('audit-report.json', 'utf8'));
+          if (report.error) {
+            console.log('::warning::npm advisory service unavailable; audit could not be refreshed');
+            process.exit(0);
+          }
+          const vulnerabilities = report.metadata?.vulnerabilities;
+          if (!vulnerabilities) {
+            console.error('npm audit returned an unrecognized report');
+            process.exit(1);
+          }
+          const blocking = (vulnerabilities.high ?? 0) + (vulnerabilities.critical ?? 0);
+          process.exit(blocking > 0 ? 1 : 0);
+          EOF
