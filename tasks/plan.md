@@ -17,12 +17,12 @@ Deliver a contract-first static editor. Prove the risky FTB exporter with unit t
 ### Phase 1: Contract and exporter
 
 - [x] Task 1: Bootstrap the typed static app and public project contract.
-- [ ] Task 2: Validate projects and generate deterministic FTB files.
+- [x] Task 2: Validate projects and generate deterministic FTB files.
 
 ### Checkpoint: Foundation
 
-- [ ] Model and exporter tests pass.
-- [ ] Application builds cleanly.
+- [x] Model and exporter tests pass.
+- [x] Application builds cleanly.
 
 ### Phase 2: Usable editor
 

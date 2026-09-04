@@ -8,10 +8,10 @@
 
 ## Task 2: Validation and FTB export
 
-- [ ] Invalid imported projects produce path-specific errors.
-- [ ] Stable IDs, dependency rules, and supported variants are checked.
-- [ ] FTB file-format v13 output and ZIP paths match the spec.
-- [ ] Verify with focused unit tests and production build.
+- [x] Invalid imported projects produce path-specific errors.
+- [x] Stable IDs, dependency rules, and supported variants are checked.
+- [x] FTB file-format v13 output and ZIP paths match the spec.
+- [x] Verify with focused unit tests and production build.
 
 ## Task 3: Chapter and quest workspace
 
