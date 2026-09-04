@@ -66,6 +66,7 @@ Components use semantic HTML and accessible native controls. User/model strings 
 - Item/checkmark tasks and item/XP rewards can be edited.
 - Valid QuestWeaver JSON can be imported and exported; invalid input yields actionable errors without changing the current project.
 - An AI prompt plus public JSON Schema and example describes the exact accepted contract.
+- A non-JavaScript client can discover a plain-text AI guide, schema, and example from the homepage and `llms.txt`.
 - Downloaded ZIP contains `data.snbt`, `chapter_groups.snbt`, chapter files, and split `en_us` localization in the current FTB directory structure.
 - The app builds and deploys under the `/QuestWeaver/` GitHub Pages base path.
 

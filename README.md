@@ -19,13 +19,15 @@ Keep a reusable copy with **Save JSON**. That file can be imported into QuestWea
 
 ## Build with Gemini, GPT, or another AI
 
-1. Select **Ask AI**.
-2. Copy the generated prompt into the model of your choice and tell it what to add or change.
+Models are not expected to click or control QuestWeaver. Give a text-only model the [AI authoring guide](https://kiradiamond.github.io/QuestWeaver/ai-guide.txt), or select **Ask AI** to include the book currently open in the editor.
+
+1. Select **Ask AI**, or open the text-only AI guide directly in your model.
+2. Give the model the generated prompt or your requested quest book changes.
 3. Save the model's response as a `.json` file. The response must contain only the JSON object, without a Markdown code fence.
 4. Select **Import JSON** in QuestWeaver.
 5. Review the result visually, then save the project or export the FTB ZIP.
 
-The prompt links to the public [JSON Schema](https://kiradiamond.github.io/QuestWeaver/questweaver.schema.json) and [example project](https://kiradiamond.github.io/QuestWeaver/questweaver.example.json), so a model can discover the exact contract from the published site.
+The homepage, [`llms.txt`](https://kiradiamond.github.io/QuestWeaver/llms.txt), AI guide, public [JSON Schema](https://kiradiamond.github.io/QuestWeaver/questweaver.schema.json), and [example project](https://kiradiamond.github.io/QuestWeaver/questweaver.example.json) are all readable without running the client-side application.
 
 ## Current support
 

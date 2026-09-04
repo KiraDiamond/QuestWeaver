@@ -1,0 +1,12 @@
+# QuestWeaver
+
+> A static, private-in-the-browser editor that converts a versioned JSON project into an FTB Quests format-13 ZIP.
+
+## AI authoring
+
+- Guide: https://kiradiamond.github.io/QuestWeaver/ai-guide.txt
+- JSON Schema: https://kiradiamond.github.io/QuestWeaver/questweaver.schema.json
+- Example project: https://kiradiamond.github.io/QuestWeaver/questweaver.example.json
+- Source and documentation: https://github.com/KiraDiamond/QuestWeaver
+
+Text-only models do not need to operate the editor. Read the guide and return a valid QuestWeaver JSON object for the human to import.

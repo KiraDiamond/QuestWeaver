@@ -36,6 +36,7 @@ export function ChapterSidebar({ chapters, selectedId, onSelect, onAdd }: Chapte
       <div className="sidebar-note">
         <strong>AI-ready</strong>
         <p>Use Ask AI to hand this book to Gemini, GPT, or another model.</p>
+        <a href="ai-guide.txt" target="_blank" rel="noreferrer">Open the text-only AI guide</a>
       </div>
     </nav>
   );

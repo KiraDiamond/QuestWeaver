@@ -1,0 +1,41 @@
+QuestWeaver AI Authoring Guide
+==============================
+
+Purpose
+-------
+Help a human create or edit a QuestWeaver project for an FTB Quests book.
+You do not need to operate the QuestWeaver web interface. Your job is to return
+the project JSON; the human will import your JSON and export the FTB ZIP.
+
+Public contract
+---------------
+JSON Schema:
+https://kiradiamond.github.io/QuestWeaver/questweaver.schema.json
+
+Example project:
+https://kiradiamond.github.io/QuestWeaver/questweaver.example.json
+
+Editor:
+https://kiradiamond.github.io/QuestWeaver/
+
+Instructions
+------------
+1. Read the JSON Schema and example project.
+2. If the human supplied a current QuestWeaver project, edit that object and
+   preserve every existing object ID.
+3. Otherwise, use the example as a structural reference and create a complete
+   new project for the human's requested quest book.
+4. Generate every new ID as a unique 16-character uppercase hexadecimal string.
+5. Use Minecraft resource IDs such as minecraft:stone.
+6. Quest dependencies must reference existing quest IDs and must not reference
+   the quest itself.
+7. Supported task types are item and checkmark.
+8. Supported reward types are item and xp.
+9. Return only one valid JSON object. Do not wrap it in Markdown and do not add
+   explanation before or after it.
+
+Human handoff
+-------------
+The human will import your JSON with QuestWeaver's Import JSON button, review it,
+and use Export FTB ZIP. If QuestWeaver reports validation errors, correct the
+reported JSON paths and return the entire corrected object again.
