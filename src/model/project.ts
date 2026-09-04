@@ -140,6 +140,18 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+function rejectUnknownFields(
+  errors: string[],
+  value: Record<string, unknown>,
+  path: string,
+  allowed: readonly string[],
+): void {
+  const allowedSet = new Set(allowed);
+  Object.keys(value).forEach((key) => {
+    if (!allowedSet.has(key)) errors.push(`${path ? `${path}.` : ''}${key}: is not a supported field`);
+  });
+}
+
 function addStringError(
   errors: string[],
   value: unknown,
@@ -203,6 +215,12 @@ function validateTask(errors: string[], value: unknown, path: string, ids: Set<s
     errors.push(`${path}: must be an object`);
     return;
   }
+  rejectUnknownFields(
+    errors,
+    value,
+    path,
+    value.type === 'item' ? ['id', 'type', 'item', 'count', 'consumeItems'] : ['id', 'type'],
+  );
   validateId(errors, value.id, `${path}.id`, ids);
   if (value.type === 'checkmark') return;
   if (value.type !== 'item') {
@@ -222,6 +240,12 @@ function validateReward(errors: string[], value: unknown, path: string, ids: Set
     errors.push(`${path}: must be an object`);
     return;
   }
+  rejectUnknownFields(
+    errors,
+    value,
+    path,
+    value.type === 'item' ? ['id', 'type', 'item', 'count'] : ['id', 'type', 'xp'],
+  );
   validateId(errors, value.id, `${path}.id`, ids);
   if (value.type === 'item') {
     addStringError(errors, value.item, `${path}.item`, {
@@ -249,6 +273,20 @@ function validateQuest(
     errors.push(`${path}: must be an object`);
     return;
   }
+  rejectUnknownFields(errors, value, path, [
+    'id',
+    'title',
+    'subtitle',
+    'description',
+    'icon',
+    'x',
+    'y',
+    'size',
+    'shape',
+    'dependencies',
+    'tasks',
+    'rewards',
+  ]);
   if (validateId(errors, value.id, `${path}.id`, ids)) questIds.add(value.id);
   addStringError(errors, value.title, `${path}.title`, { max: 120 });
   addStringError(errors, value.subtitle, `${path}.subtitle`, { allowEmpty: true, max: 240 });
@@ -273,6 +311,7 @@ function validateQuest(
 export function validateProject(value: unknown): string[] {
   const errors: string[] = [];
   if (!isRecord(value)) return ['project: must be an object'];
+  rejectUnknownFields(errors, value, '', ['$schema', 'schemaVersion', 'ftbFormat', 'title', 'chapters']);
   if (value.schemaVersion !== QUESTWEAVER_SCHEMA_VERSION) errors.push('schemaVersion: must be 1');
   if (value.ftbFormat !== FTB_FILE_FORMAT) errors.push('ftbFormat: must be 13');
   addStringError(errors, value.title, 'title', { max: 120 });
@@ -285,19 +324,26 @@ export function validateProject(value: unknown): string[] {
 
   const ids = new Set<string>();
   const questIds = new Set<string>();
+  const chapterFilenames = new Set<string>();
   value.chapters.forEach((chapter, chapterIndex) => {
     const path = `chapters[${chapterIndex}]`;
     if (!isRecord(chapter)) {
       errors.push(`${path}: must be an object`);
       return;
     }
+    rejectUnknownFields(errors, chapter, path, ['id', 'title', 'subtitle', 'filename', 'icon', 'quests']);
     validateId(errors, chapter.id, `${path}.id`, ids);
     addStringError(errors, chapter.title, `${path}.title`, { max: 120 });
     validateStringArray(errors, chapter.subtitle, `${path}.subtitle`, 20);
-    addStringError(errors, chapter.filename, `${path}.filename`, {
+    if (addStringError(errors, chapter.filename, `${path}.filename`, {
       pattern: FILENAME_PATTERN,
       patternMessage: 'must use only lowercase letters, numbers, underscores, or hyphens',
-    });
+    })) {
+      if (chapterFilenames.has(chapter.filename)) {
+        errors.push(`${path}.filename: duplicates another chapter filename`);
+      }
+      chapterFilenames.add(chapter.filename);
+    }
     addStringError(errors, chapter.icon, `${path}.icon`, {
       pattern: RESOURCE_PATTERN,
       patternMessage: 'must be a namespaced resource such as minecraft:book',

@@ -51,4 +51,24 @@ describe('QuestWeaver project contract', () => {
       errors: ['file: exceeds the 1 MB import limit'],
     });
   });
+
+  it('rejects duplicate chapter filenames that would overwrite exported files', () => {
+    const project = createProject();
+    const duplicate = {
+      ...project.chapters[0]!,
+      id: 'A000000000000002',
+      quests: [],
+    };
+
+    expect(validateProject({ ...project, chapters: [...project.chapters, duplicate] })).toContain(
+      'chapters[1].filename: duplicates another chapter filename',
+    );
+  });
+
+  it('rejects unsupported fields from model output instead of silently discarding them', () => {
+    const project = createProject();
+    const result = parseProjectJson(JSON.stringify({ ...project, surprise: 'execute me' }));
+
+    expect(result).toEqual({ ok: false, errors: ['surprise: is not a supported field'] });
+  });
 });

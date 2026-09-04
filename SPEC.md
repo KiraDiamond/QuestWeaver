@@ -8,7 +8,7 @@ The MVP targets FTB Quests save format version 13 and English (`en_us`) localiza
 
 ## Tech Stack
 
-- React 19.2 with TypeScript 7
+- React 19.2 with TypeScript 6.0
 - Vite 8 static build
 - Vitest 5 for unit tests
 - JSZip 3 for browser-side ZIP generation
