@@ -26,17 +26,17 @@ Deliver a contract-first static editor. Prove the risky FTB exporter with unit t
 
 ### Phase 2: Usable editor
 
-- [ ] Task 3: Build the chapter/quest workspace and property editor.
-- [ ] Task 4: Add visual positioning, dependencies, tasks, and rewards.
-- [ ] Task 5: Add AI prompt, JSON import/export, and FTB ZIP download.
+- [x] Task 3: Build the chapter/quest workspace and property editor.
+- [x] Task 4: Add visual positioning, dependencies, tasks, and rewards.
+- [x] Task 5: Add AI prompt, JSON import/export, and FTB ZIP download.
 
 ### Checkpoint: Core flow
 
-- [ ] A project can be created, edited, round-tripped as JSON, and exported.
+- [x] A project can be created, edited, round-tripped as JSON, and exported.
 
 ### Phase 3: Ship
 
-- [ ] Task 6: Add onboarding, documentation, CI, and GitHub Pages deployment.
+- [x] Task 6: Add onboarding, documentation, CI, and GitHub Pages deployment.
 - [ ] Task 7: Perform automated, browser, accessibility, security, and code-quality verification.
 
 ## Risks and Mitigations

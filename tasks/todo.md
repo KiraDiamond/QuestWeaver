@@ -15,28 +15,28 @@
 
 ## Task 3: Chapter and quest workspace
 
-- [ ] Users can add, select, rename, duplicate, and delete chapters/quests.
-- [ ] Empty states and destructive-action confirmation are present.
-- [ ] Verify with component tests and keyboard interaction.
+- [x] Users can add, select, rename, and delete chapters, and duplicate quests.
+- [x] Empty states and destructive-action confirmation are present.
+- [x] Verify with component tests and keyboard interaction.
 
 ## Task 4: Layout, tasks, rewards, and dependencies
 
-- [ ] Quest nodes are draggable on a bounded canvas.
-- [ ] Users can set dependencies and edit supported task/reward variants.
-- [ ] Verify state updates and dependency lines in tests/browser.
+- [x] Quest nodes are draggable on a bounded canvas.
+- [x] Users can set dependencies and edit supported task/reward variants.
+- [x] Verify state updates and dependency lines in tests/browser.
 
 ## Task 5: Model and file interchange
 
-- [ ] AI prompt copies the contract location and embeds current project JSON.
-- [ ] Project JSON import is capped, validated, and atomic.
-- [ ] Project JSON and FTB ZIP download successfully.
-- [ ] Verify round-trip and download behavior.
+- [x] AI prompt copies the contract location and embeds current project JSON.
+- [x] Project JSON import is capped, validated, and atomic.
+- [x] Project JSON and FTB ZIP download successfully.
+- [x] Verify round-trip and download behavior.
 
 ## Task 6: Documentation and deployment
 
-- [ ] README covers human workflow, AI workflow, local use, output location, and limitations.
-- [ ] CI gates lint, types, tests, build, and high-severity audit.
-- [ ] Pages workflow publishes `dist` from `main`.
+- [x] README covers human workflow, AI workflow, local use, output location, and limitations.
+- [x] CI gates lint, types, tests, build, and high-severity audit.
+- [x] Pages workflow publishes `dist` from `main`.
 
 ## Task 7: Final verification
 
