@@ -1,0 +1,74 @@
+{
+  "$schema": "./questweaver.schema.json",
+  "schemaVersion": 1,
+  "ftbFormat": 13,
+  "title": "Gemstone Journey",
+  "chapters": [
+    {
+      "id": "A000000000000001",
+      "title": "Getting Started",
+      "subtitle": ["Your first steps"],
+      "filename": "getting_started",
+      "icon": "minecraft:crafting_table",
+      "quests": [
+        {
+          "id": "B000000000000001",
+          "title": "Gather Stone",
+          "subtitle": "Start with the basics",
+          "description": ["Collect 16 stone."],
+          "icon": "minecraft:stone",
+          "x": -1,
+          "y": 0,
+          "size": 1,
+          "shape": "circle",
+          "dependencies": [],
+          "tasks": [
+            {
+              "id": "C000000000000001",
+              "type": "item",
+              "item": "minecraft:stone",
+              "count": 16,
+              "consumeItems": false
+            }
+          ],
+          "rewards": [
+            {
+              "id": "D000000000000001",
+              "type": "xp",
+              "xp": 100
+            }
+          ]
+        },
+        {
+          "id": "B000000000000002",
+          "title": "Find a Diamond",
+          "subtitle": "A sparkling milestone",
+          "description": ["Mine your first diamond."],
+          "icon": "minecraft:diamond",
+          "x": 1,
+          "y": 0,
+          "size": 1.25,
+          "shape": "diamond",
+          "dependencies": ["B000000000000001"],
+          "tasks": [
+            {
+              "id": "C000000000000002",
+              "type": "item",
+              "item": "minecraft:diamond",
+              "count": 1,
+              "consumeItems": false
+            }
+          ],
+          "rewards": [
+            {
+              "id": "D000000000000002",
+              "type": "item",
+              "item": "minecraft:emerald",
+              "count": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

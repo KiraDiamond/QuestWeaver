@@ -2,9 +2,9 @@
 
 ## Task 1: Bootstrap and contract
 
-- [ ] React/Vite/TypeScript project installs and builds.
-- [ ] Versioned project types, sample, and JSON Schema agree.
-- [ ] Verify with type checking and schema fixture tests.
+- [x] React/Vite/TypeScript project installs and builds.
+- [x] Versioned project types, sample, and JSON Schema agree.
+- [x] Verify with type checking and schema fixture tests.
 
 ## Task 2: Validation and FTB export
 

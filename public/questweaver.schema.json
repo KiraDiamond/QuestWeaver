@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kiradiamond.github.io/QuestWeaver/questweaver.schema.json",
+  "title": "QuestWeaver project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "ftbFormat", "title", "chapters"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "ftbFormat": { "const": 13 },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "chapters": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": { "$ref": "#/$defs/chapter" }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[0-9A-F]{16}$" },
+    "resource": { "type": "string", "pattern": "^[a-z0-9_.-]+:[a-z0-9_./-]+$" },
+    "chapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "subtitle", "filename", "icon", "quests"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "subtitle": { "type": "array", "maxItems": 20, "items": { "type": "string", "maxLength": 500 } },
+        "filename": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$" },
+        "icon": { "$ref": "#/$defs/resource" },
+        "quests": { "type": "array", "maxItems": 500, "items": { "$ref": "#/$defs/quest" } }
+      }
+    },
+    "quest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "subtitle", "description", "icon", "x", "y", "size", "shape", "dependencies", "tasks", "rewards"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "subtitle": { "type": "string", "maxLength": 240 },
+        "description": { "type": "array", "maxItems": 50, "items": { "type": "string", "maxLength": 500 } },
+        "icon": { "$ref": "#/$defs/resource" },
+        "x": { "type": "number", "minimum": -10000, "maximum": 10000 },
+        "y": { "type": "number", "minimum": -10000, "maximum": 10000 },
+        "size": { "type": "number", "minimum": 0.25, "maximum": 4 },
+        "shape": { "enum": ["circle", "square", "diamond", "rsquare", "pentagon", "hexagon", "octagon", "heart", "gear"] },
+        "dependencies": { "type": "array", "uniqueItems": true, "maxItems": 100, "items": { "$ref": "#/$defs/id" } },
+        "tasks": { "type": "array", "items": { "$ref": "#/$defs/task" } },
+        "rewards": { "type": "array", "items": { "$ref": "#/$defs/reward" } }
+      }
+    },
+    "task": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "type", "item", "count", "consumeItems"],
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "type": { "const": "item" },
+            "item": { "$ref": "#/$defs/resource" },
+            "count": { "type": "integer", "minimum": 1 },
+            "consumeItems": { "type": "boolean" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "type"],
+          "properties": { "id": { "$ref": "#/$defs/id" }, "type": { "const": "checkmark" } }
+        }
+      ]
+    },
+    "reward": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "type", "item", "count"],
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "type": { "const": "item" },
+            "item": { "$ref": "#/$defs/resource" },
+            "count": { "type": "integer", "minimum": 1, "maximum": 64 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "type", "xp"],
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "type": { "const": "xp" },
+            "xp": { "type": "integer", "minimum": 1, "maximum": 1000000 }
+          }
+        }
+      ]
+    }
+  }
+}
